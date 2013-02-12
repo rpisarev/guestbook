@@ -12,7 +12,7 @@ class GuBook(models.Model):
 	def __unicode__(self):
                 return self.text[:10]
 	def lst(self):
-		return [self.username, self.email, self.text, self.date]
+		return [self.username, self.image, self.email, self.date, self.homepage, self.text, self.browser, self.ip]
 
         class Meta:
                 ordering = ["date"]
