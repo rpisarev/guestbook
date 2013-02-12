@@ -11,6 +11,8 @@ class GuBook(models.Model):
 	date = models.DateTimeField()
 	def __unicode__(self):
                 return self.text[:10]
+	def lst(self):
+		return [self.username, self.email, self.text, self.date]
 
         class Meta:
                 ordering = ["date"]

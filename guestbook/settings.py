@@ -1,4 +1,5 @@
 # Django settings for guestbook project.
+import os.path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -86,6 +87,10 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+)
+
 
 MIDDLEWARE_CLASSES = (
 #    'django.middleware.common.CommonMiddleware',
@@ -102,11 +107,11 @@ ROOT_URLCONF = 'guestbook.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'guestbook.wsgi.application'
 
-TEMPLATE_DIRS = (
+#EMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-)
+#
 
 INSTALLED_APPS = (
 #    'django.contrib.auth',
