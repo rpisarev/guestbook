@@ -4,11 +4,11 @@ class GuBook(models.Model):
         username = models.CharField(max_length=255)
 	email = models.EmailField()
 	homepage =  models.URLField(blank = True)
-	text = models.CharField()
-	image = ImageField(blank = True))
-	ip = models.CharField()
-	browser = models.CharField()
-	date = models.DateField()
+	text = models.CharField(max_length=2**16)
+	image = models.ImageField(upload_to='img')
+	ip = models.CharField(max_length=20)
+	browser = models.CharField(max_length=255)
+	date = models.DateTimeField()
 	def __unicode__(self):
                 return self.text
 
