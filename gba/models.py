@@ -4,13 +4,13 @@ class GuBook(models.Model):
         username = models.CharField(max_length=255)
 	email = models.EmailField()
 	homepage =  models.URLField(blank = True)
-	text = models.CharField(max_length=2**16)
-	image = models.ImageField(upload_to='img/%Y/%m/%d')
-	ip = models.CharField(max_length=20)
+	text = models.TextField()
+	image = models.ImageField(upload_to='img/%Y/%m/%d', blank = True)
+	ip = models.IPAddressField()
 	browser = models.CharField(max_length=255)
 	date = models.DateTimeField()
 	def __unicode__(self):
-                return self.text
+                return self.text[:10]
 
         class Meta:
                 ordering = ["date"]
