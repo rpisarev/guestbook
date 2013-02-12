@@ -5,7 +5,7 @@ class GuBook(models.Model):
 	email = models.EmailField()
 	homepage =  models.URLField(blank = True)
 	text = models.CharField(max_length=2**16)
-	image = models.ImageField(upload_to='img')
+	image = models.ImageField(upload_to='img/%Y/%m/%d'. '%Y/%m/%d')
 	ip = models.CharField(max_length=20)
 	browser = models.CharField(max_length=255)
 	date = models.DateTimeField()
