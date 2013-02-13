@@ -13,7 +13,7 @@ import guestbook.settings
 from gba.forms import AddGuBook, RecaptchaForm
 
 
-def home(request, page = 0):
+def home(request, ording='down', sorting='date', page = 0):
 	if request.method == 'POST':
 		form = AddGuBook(request.POST)
 		if form.is_valid():
@@ -30,15 +30,19 @@ def home(request, page = 0):
 			return HttpResponseRedirect('/')
 	else:
 		form = AddGuBook()
-	t = GuBook.objects.all().order_by('-date')
+	try:
+		sorttype = {
+			('up', 'date'): 'date',
+			('down', 'date'): '-date',
+			('up', 'username'): 'username',
+        		('down', 'username'): '-username',
+			('up', 'email'): 'email',
+        		('down', 'email'): '-email',
+		}[(ording, sorting)]
+	except:
+		sorttype = '-date'
+	t = GuBook.objects.all().order_by(sorttype)
 	page = int(page)
-	if len(t) < page*10 + 10:
-		page = 0
-		t = t[:10]
-	elif page*10<len(t)<page*10 + 10:
-		t = t[page*10:]
-	else:
-		t = t[page*10:page*10+10]
 	t = [obj.lst() for obj in t]
 	return render_to_response('2.html', 
 	{
