@@ -31,7 +31,7 @@ def gen_color(n):
 #        )
 
 
-def home(request):
+def home(request, page = 0):
 	if request.method == 'POST':
 		form = AddGuBook(request.POST)
 		if form.is_valid():
@@ -48,12 +48,13 @@ def home(request):
 			return HttpResponseRedirect('/')
 	else:
 		form = AddGuBook()
-	t = GuBook.objects.all().reverse()
+	t = GuBook.objects.all().order_by('username')
 	l = [obj.lst() for obj in t]
 	s = [gen_color(i%2) for i in xrange(len(t))]
 	return render_to_response('2.html', 
 	{
 		'form': form,
-		'd': list(zip(s, l))
+		'd': list(zip(s, l)),
+		'page': page
 	}
 	)

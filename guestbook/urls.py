@@ -6,6 +6,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
+	url(r'^(\d*)/$', 'gba.views.home', name='home'),
 	url(r'^$', 'gba.views.home', name='home'),
 #	url(r'^add/$', 'gba.views.add', name='add'),
     # url(r'^guestbook/', include('guestbook.foo.urls')),
