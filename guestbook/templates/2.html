@@ -1,0 +1,46 @@
+<html>
+<link rel="stylesheet" type="text/css" href="https://dl.dropbox.com/u/20428214/gb/1.css" />
+<head>
+    <title>GuestBook</title>
+</head>
+<body>
+    <h1>GuestBook</h1>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="" method="post">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+<table border="1">
+  <tr id="idcolorgray">
+    <th>User Name</th>
+    <th>Image</th>
+    <th>E-mail</th>
+    <th>Date </th>
+    <th>Homepage</th>
+    <th>Text</th>
+    <th>Browser</th>
+    <th>IP </th>
+  </tr>
+{% for r in d %}
+{% for rows in r %}
+{% if forloop.first %} <tr id="idcolor{{ rows }}" > {% else %}
+
+        {% for cols in rows %}
+                {% if forloop.first %} <td id="idus"> {{ cols }}{% else %} <td> {{ cols }}{% endif %} </td>
+        {% endfor %}
+ {% endif %}
+
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>

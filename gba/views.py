@@ -19,19 +19,19 @@ def gen_color(n):
 	}
 	return color[n]
 
-def home(request):
-	t = GuBook.objects.all()
-	l = [obj.lst() for obj in t]
+#def home(request):
+#	t = GuBook.objects.all()
+#	l = [obj.lst() for obj in t]
 #	t =[[1111111,2222,333333333,555555555], [222,444,6666,7]]
-	s = [gen_color(i%2) for i in xrange(len(t))]
-        return render_to_response('1.html',
-        {
-		'd': list(zip(s, l))
-        }
-        )
+#	s = [gen_color(i%2) for i in xrange(len(t))]
+#       return render_to_response('1.html',
+#        {
+#		'd': list(zip(s, l))
+#        }
+#        )
 
 
-def add(request):
+def home(request):
 	if request.method == 'POST':
 		form = AddGuBook(request.POST)
 		if form.is_valid():
@@ -48,11 +48,12 @@ def add(request):
 			return HttpResponseRedirect('/')
 	else:
 		form = AddGuBook()
-	t = GuBook.objects.all()
+	t = GuBook.objects.all().reverse()
 	l = [obj.lst() for obj in t]
 	s = [gen_color(i%2) for i in xrange(len(t))]
 	return render_to_response('2.html', 
 	{
-		'form': form
+		'form': form,
+		'd': list(zip(s, l))
 	}
 	)
