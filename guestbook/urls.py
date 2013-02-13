@@ -7,6 +7,8 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
 	url(r'^([a-z]+)/([a-z]+)/(\d*)/$', 'gba.views.home', name='home'),
+	url(r'^([a-z]+)/([a-z]+)/$', 'gba.views.home', name='home'),
+	url(r'^(\d*)/$', 'gba.views.home', name='home'),
 	url(r'^$', 'gba.views.home', name='home'),
 #	{'form_class': RecaptchaForm}
 #	url(r'^add/$', 'gba.views.add', name='add'),
