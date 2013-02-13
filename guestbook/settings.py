@@ -20,6 +20,8 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+RECAPTCHA_PUBLIC_KEY = '6LcH9dwSAAAAAGFJTvZlbsozpuSpErezHMf_b4CZ'
+RECAPTCHA_PRIVATE_KEY = '6LcH9dwSAAAAAKSo8pu4_x6f76WRb7YqJB0nb5kt'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -123,6 +125,7 @@ INSTALLED_APPS = (
 #    'django.contrib.messages',
 #    'django.contrib.staticfiles',
 	'gba',
+	'captcha',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

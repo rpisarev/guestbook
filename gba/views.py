@@ -10,7 +10,7 @@ from gba.models import *
 from django.template.context import RequestContext
 import datetime, unicodedata
 import guestbook.settings
-from gba.forms import AddGuBook
+from gba.forms import AddGuBook, RecaptchaForm
 
 def gen_color(n):
 	color = {
