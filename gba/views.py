@@ -6,6 +6,7 @@ from django import template
 import time
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404, get_list_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from gba.models import *
 from django.template.context import RequestContext
 import datetime, unicodedata
@@ -46,9 +47,13 @@ def home(request, ording='down', sorting='date', page = 0):
 	except:
 		sorttype = '-date'
 		currentort = 'down'
-	t = GuBook.objects.all().order_by(sorttype)
-	page = int(page)
-	t = [obj.lst() for obj in t]
+	mesgs = GuBook.objects.all().order_by(sorttype)
+	paginator = Paginator(mesgs, 10)
+	try:
+		page = int(page)
+		t = paginator.page(page)
+	except:
+		t = paginator.page(1)
 	return render_to_response('2.html', 
 	{
 		'form': form,

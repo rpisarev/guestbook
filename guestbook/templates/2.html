@@ -59,19 +59,29 @@
     <th>IP </th>
   </tr>
 
-{% for rows in d %}
+{% for rows in d.object_list %}
 <tr  class="{% cycle "colorwhite" "colorgray" %}">
-        {% for cols in rows %}
+        {% for cols in rows.lst %}
                 <td{% if forloop.first %} class="user"{% endif %}>{{ cols|wordwrap:20|escape }}</td>
         {% endfor %}
-
-
-
 </tr>
 {% endfor %}
 </table>
-<p>
-Page {{ page }}
-</p>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if d.has_previous %}
+            <a href="?page={{ d.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ d.number }} of {{ d.paginator.num_pages }}.
+        </span>
+
+        {% if d.has_next %}
+            <a href="?page={{ d.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 </body>
 </html>
