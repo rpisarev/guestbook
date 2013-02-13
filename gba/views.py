@@ -57,12 +57,12 @@ def home(request, page = 0):
 		t = t[page*10:]
 	else:
 		t = t[page*10:page*10+10]
-	l = [obj.lst() for obj in t]
-	s = [gen_color(i%2) for i in xrange(len(t))]
+	t = [obj.lst() for obj in t]
+#	s = [gen_color(i%2) for i in xrange(len(t))]
 	return render_to_response('2.html', 
 	{
 		'form': form,
-		'd': list(zip(s, l)),
+		'd': t,
 		'page': page
 	}
 	)

@@ -19,7 +19,7 @@
         <input type="submit" value="Submit">
     </form>
 <table border="1">
-  <tr id="idcolorgray">
+  <tr class = "colorgray">
     <th>User Name</th>
     <th>Image</th>
     <th>E-mail</th>
@@ -29,16 +29,15 @@
     <th>Browser</th>
     <th>IP </th>
   </tr>
-{% for r in d %}
-{% for rows in r %}
-{% if forloop.first %} <tr id="idcolor{{ rows }}" > {% else %}
 
+{% for rows in d %}
+<tr  class="{% cycle "colorwhite" "colorgray" %}">
         {% for cols in rows %}
                 {% if forloop.first %} <td id="idus"> {{ cols }}{% else %} <td> {{ cols }}{% endif %} </td>
         {% endfor %}
- {% endif %}
 
-{% endfor %}
+
+
 </tr>
 {% endfor %}
 </table>
