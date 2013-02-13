@@ -61,7 +61,7 @@
 {% for rows in d %}
 <tr  class="{% cycle "colorwhite" "colorgray" %}">
         {% for cols in rows %}
-                {% if forloop.first %} <td id="idus"> {{ cols|escape }}{% else %} <td> {{ cols|escape }}{% endif %} </td>
+                {% if forloop.first %} <td id="idus"> {{ cols|escape|wordwrap:50 }}{% else %} <td> {{ cols|escape|wordwrap:50 }}{% endif %} </td>
         {% endfor %}
 
 
