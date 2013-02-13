@@ -54,11 +54,13 @@ def home(request, ording='down', sorting='date', page = 0):
 		t = paginator.page(page)
 	except:
 		t = paginator.page(1)
+	uri = '/' + ording + '/' + sorting + '/'
 	return render_to_response('2.html', 
 	{
 		'form': form,
 		'd': t,
 		'ording': currentort,
-		'page': page
+		'page': page,
+		'uri': uri
 	}
 	)
