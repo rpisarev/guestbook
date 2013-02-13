@@ -1,7 +1,35 @@
 <html>
-<link rel="stylesheet" type="text/css" href="https://dl.dropbox.com/u/20428214/gb/1.css" />
 <head>
+    <meta charset="utf-8">
     <title>GuestBook</title>
+    <style type="text/css">
+    body {
+        font-family: arial, verdana, sans-serif;
+    }
+ 
+    table {
+        border-width: 0px;
+        border-spacing: 0px;
+        padding: 10px;
+        border-collapse: collapse;
+    }
+ 
+    td {
+        max-width: 400px;
+    }
+ 
+    .user {
+        font-weight: bold;
+    }
+ 
+    .colorwhite {
+        background-color: #FFFFFF;
+    }
+ 
+    .colorgray {
+        background-color: #EFEFEF;
+    }
+    </style>
 </head>
 <body>
     <h1>GuestBook</h1>
@@ -33,7 +61,7 @@
 {% for rows in d %}
 <tr  class="{% cycle "colorwhite" "colorgray" %}">
         {% for cols in rows %}
-                {% if forloop.first %} <td id="idus"> {{ cols }}{% else %} <td> {{ cols }}{% endif %} </td>
+                {% if forloop.first %} <td id="idus"> {{ cols|escape }}{% else %} <td> {{ cols|escape }}{% endif %} </td>
         {% endfor %}
 
 
