@@ -39,8 +39,13 @@ def home(request, ording='down', sorting='date', page = 0):
 			('up', 'email'): 'email',
         		('down', 'email'): '-email',
 		}[(ording, sorting)]
+		currentort = {
+			'up': 'down',
+			'down': 'up',
+		}[ording]
 	except:
 		sorttype = '-date'
+		currentort = 'down'
 	t = GuBook.objects.all().order_by(sorttype)
 	page = int(page)
 	t = [obj.lst() for obj in t]
@@ -48,6 +53,7 @@ def home(request, ording='down', sorting='date', page = 0):
 	{
 		'form': form,
 		'd': t,
+		'ording': currentort,
 		'page': page
 	}
 	)
