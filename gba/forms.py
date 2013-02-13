@@ -8,6 +8,18 @@ class AddGuBook(forms.Form):
 	text = forms.CharField(widget=forms.Textarea)
 	captcha = ReCaptchaField()
 
+	def clean_username(self):
+		username = self.cleaned_data['username']
+		if not username.isalnum():
+			raise forms.ValidationError("Not digits or alphabetic!")
+		return username
+	def clean_text(self):
+		text = self.cleaned_data['text']
+		if text.find('<') > -1 or text.find('lt;') > -1:
+			raise forms.ValidationError("HTML-tag baned!")
+		return text
+
+
 class RecaptchaForm(AddGuBook):
     captcha = ReCaptchaField()
 
