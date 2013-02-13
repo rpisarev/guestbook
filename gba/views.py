@@ -12,24 +12,6 @@ import datetime, unicodedata
 import guestbook.settings
 from gba.forms import AddGuBook, RecaptchaForm
 
-def gen_color(n):
-	color = {
-	0:'white',
-	1:'gray',
-	}
-	return color[n]
-
-#def home(request):
-#	t = GuBook.objects.all()
-#	l = [obj.lst() for obj in t]
-#	t =[[1111111,2222,333333333,555555555], [222,444,6666,7]]
-#	s = [gen_color(i%2) for i in xrange(len(t))]
-#       return render_to_response('1.html',
-#        {
-#		'd': list(zip(s, l))
-#        }
-#        )
-
 
 def home(request, page = 0):
 	if request.method == 'POST':
@@ -58,7 +40,6 @@ def home(request, page = 0):
 	else:
 		t = t[page*10:page*10+10]
 	t = [obj.lst() for obj in t]
-#	s = [gen_color(i%2) for i in xrange(len(t))]
 	return render_to_response('2.html', 
 	{
 		'form': form,
