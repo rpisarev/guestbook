@@ -25,7 +25,7 @@ urlpatterns = patterns('',
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += patterns('',
        (r'^cache/(?P<path>.*)$', 'django.views.static.serve', {
-           'document_root': guestbook.settings.MEDIA_ROOT,
+           'document_root': guestbook.settings.MEDIA_ROOT+'/cache',
            'show_indexes': True,
        }),
    )
