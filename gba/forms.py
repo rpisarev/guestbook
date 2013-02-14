@@ -6,6 +6,7 @@ class AddGuBook(forms.Form):
 	email = forms.EmailField()
 	homepage = forms.URLField(required=False)
 	text = forms.CharField(widget=forms.Textarea)
+	image = forms.ImageField(required = False)
 	captcha = ReCaptchaField()
 
 	def clean_username(self):
