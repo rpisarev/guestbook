@@ -29,3 +29,9 @@ urlpatterns += patterns('',
            'show_indexes': True,
        }),
    )
+urlpatterns += patterns('',
+       (r'([a-z]+)/([a-z]+)/(\d*)/^cache/(?P<path>.*)$', 'django.views.static.serve', {
+           'document_root': guestbook.settings.MEDIA_ROOT+'/cache',
+           'show_indexes': True,
+       }),
+   )
