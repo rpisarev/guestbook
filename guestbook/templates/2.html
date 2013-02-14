@@ -79,7 +79,7 @@
 
 <div class="pagination">
     <span class="step-links">
-        {% if d.has_previous %}
+        {% if tbl.has_previous %}
             <a href="{{ uri }}{{ tbl.previous_page_number }}/">previous</a>
         {% endif %}
 
@@ -87,7 +87,7 @@
             Page {{ d.number }} of {{ d.paginator.num_pages }}.
         </span>
 
-        {% if d.has_next %}
+        {% if tbl.has_next %}
             <a href="{{ uri }}{{ tbl.next_page_number }}/">next</a>
         {% endif %}
     </span>
