@@ -15,18 +15,7 @@ import datetime, unicodedata
 import guestbook.urls
 from gba.forms import AddGuBook, RecaptchaForm
 
-#def get_images_from_form(form, job = lambda x: x):
-#	if 'image' in form.cleaned_data and form.cleaned_data['image']:
-#		from django.core.files.uploadedfile import InMemoryUploadedFile
-#		for img_f in form.cleaned_data['image']:
-#			img_f = job(img_f)
-#			if isinstance(img_f, InMemoryUploadedFile):
-#				img.image.save(img_f.name, img_f)
-#				return img_f
-#			else:
-#				img.image.save(img_f.name, ContentFile(img_f.read()))
-#				return ContentFile(img_f.read())
-				
+		
 
 def home(request, ording='down', sorting='date', page = 0):
 	if request.method == 'POST':
@@ -40,7 +29,6 @@ def home(request, ording='down', sorting='date', page = 0):
 			ip = request.META['REMOTE_ADDR']
 			browser = request.META['HTTP_USER_AGENT']
 			image = cd['image']
-			#fls = get_images_from_form(form)
 			date = datetime.datetime.now()
 			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date, image=image)
 			fls = ContentFile(request.FILES['image'].read())
@@ -71,14 +59,14 @@ def home(request, ording='down', sorting='date', page = 0):
 	paginator = Paginator(mesgs, 10)
 	try:
 		page = int(page)
-		t = paginator.page(page)
+		tbl = paginator.page(page)
 	except:
-		t = paginator.page(1)
+		tbl = paginator.page(1)
 	uri = '/' + ording + '/' + sorting + '/'
 	return render_to_response('2.html', 
 	{
 		'form': form,
-		'd': t,
+		'tbl': tbl,
 		'ording': currentort,
 		'page': page,
 		'uri': uri
