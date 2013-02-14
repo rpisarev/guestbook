@@ -18,11 +18,14 @@ def get_images_from_form(form, job = lambda x: x):
 	if 'image' in form.cleaned_data and form.cleaned_data['image']:
 		from django.core.files.uploadedfile import InMemoryUploadedFile
 		for img_f in form.cleaned_data['image']:
-			img = job(img)
+			img_f = job(img_f)
 			if isinstance(img_f, InMemoryUploadedFile):
 				img.image.save(img_f.name, img_f)
+				return img_f
 			else:
 				img.image.save(img_f.name, ContentFile(img_f.read()))
+				return ContentFile(img_f.read())
+				
 
 def home(request, ording='down', sorting='date', page = 0):
 	if request.method == 'POST':
