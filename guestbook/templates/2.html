@@ -63,7 +63,7 @@
 <tr  class="{% cycle "colorwhite" "colorgray" %}">
         {% for cols in rows.lst %}
                 <td{% if forloop.first %} class="user"{% endif %}>
-                {% if forloop.counter == 2 }} 
+                {% if forloop.counter == 2 %} 
                 <img src="{{ STATIC_URL }}/static/{{ cols }}" alt="{{ cols|wordwrap:20|escape }}" />
                 {% else %}
                 {{ cols|wordwrap:20|escape }}</td> {% endif %}
