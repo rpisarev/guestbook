@@ -58,7 +58,7 @@
     <th>Browser</th>
     <th>IP </th>
   </tr>
-
+{% load thumbnail %}
 {% for rows in d.object_list %}
 <tr  class="{% cycle "colorwhite" "colorgray" %}">
         {% for cols in rows.lst %}
