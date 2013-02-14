@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+import guestbook.settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -24,7 +25,7 @@ urlpatterns = patterns('',
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += patterns('',
        (r'^cache/(?P<path>.*)$', 'django.views.static.serve', {
-           'document_root': settings.MEDIA_ROOT,
+           'document_root': guestbook.settings.MEDIA_ROOT,
            'show_indexes': True,
        }),
    )
