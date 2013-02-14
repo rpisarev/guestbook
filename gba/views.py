@@ -3,6 +3,7 @@
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 from django.template.loader import get_template
 from django import template
+from sorl.thumbnail.shortcuts import get_thumbnail
 import time
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -39,10 +40,10 @@ def home(request, ording='down', sorting='date', page = 0):
 			ip = request.META['REMOTE_ADDR']
 			browser = request.META['HTTP_USER_AGENT']
 			image = cd['image']
-			#imagefile = get_images_from_form(form)
+			fls = get_images_from_form(form)
 			date = datetime.datetime.now()
 			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date, image=image)
-			fls = ContentFile(request.FILES['image'].read())
+			#fls = ContentFile(request.FILES['image'].read())
 			record.image.save(request.FILES['image'].name, fls)
 			record.save()
 			return HttpResponseRedirect('/')
