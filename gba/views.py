@@ -14,6 +14,15 @@ import datetime, unicodedata
 import guestbook.settings
 from gba.forms import AddGuBook, RecaptchaForm
 
+def get_images_from_form(form, job = lambda x: x):
+	if 'image' in form.cleaned_data and form.cleaned_data['image']:
+		from django.core.files.uploadedfile import InMemoryUploadedFile
+		for img_f in form.cleaned_data['image']:
+			img = job(img)
+			if isinstance(img_f, InMemoryUploadedFile):
+				img.image.save(img_f.name, img_f)
+			else:
+				img.image.save(img_f.name, ContentFile(img_f.read()))
 
 def home(request, ording='down', sorting='date', page = 0):
 	if request.method == 'POST':
@@ -26,7 +35,7 @@ def home(request, ording='down', sorting='date', page = 0):
                         text = cd['text']
 			ip = request.META['REMOTE_ADDR']
 			browser = request.META['HTTP_USER_AGENT']
-			imagefile = ContentFile(request.FILES['image'].read())
+			imagefile = get_images_from_form(form)
 			date = datetime.datetime.now()
 			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date)
 			record.image.save(request.FILES['image'].name, imagefile)
