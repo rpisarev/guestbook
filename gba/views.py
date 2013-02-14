@@ -12,7 +12,6 @@ from gba.models import *
 from django.template.context import RequestContext
 from django.core.files.base import ContentFile
 import datetime, unicodedata
-import guestbook.settings
 import guestbook.urls
 from gba.forms import AddGuBook, RecaptchaForm
 
@@ -76,9 +75,6 @@ def home(request, ording='down', sorting='date', page = 0):
 	except:
 		t = paginator.page(1)
 	uri = '/' + ording + '/' + sorting + '/'
-	s = guestbook.urls.urlpatterns[-1].regex
-	guestbook.urls.urlpatterns[-1].regex = s
-	t =1/0
 	return render_to_response('2.html', 
 	{
 		'form': form,
