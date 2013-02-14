@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from gba.models import *
 from django.template.context import RequestContext
-from django.core.files.base import ContenFile
+from django.core.files.base import ContentFile
 import datetime, unicodedata
 import guestbook.settings
 from gba.forms import AddGuBook, RecaptchaForm
