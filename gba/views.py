@@ -39,9 +39,9 @@ def home(request, ording='down', sorting='date', page = 0):
 			ip = request.META['REMOTE_ADDR']
 			browser = request.META['HTTP_USER_AGENT']
 			imagefile = get_images_from_form(form)
+			image = cd['image']
 			date = datetime.datetime.now()
-			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date)
-			record.image.save(request.FILES['image'].name, imagefile)
+			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date, image=image)
 			record.save()
 			return HttpResponseRedirect('/')
 	else:
