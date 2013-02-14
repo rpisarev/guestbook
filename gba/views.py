@@ -46,7 +46,7 @@ def home(request, ording='down', sorting='date', page = 0):
 			fls = ContentFile(request.FILES['image'].read())
 			record.image.save(request.FILES['image'].name, fls)
 			resize_fls = get_thumbnail(record.image, '60x80', crop='center', quality=99)
-			record.image.save(request.FILES['image'].name, resize_fls)
+			image = resize_fls.url
 			record.save()
 			return HttpResponseRedirect('/')
 	else:
