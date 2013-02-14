@@ -41,7 +41,7 @@ def home(request, ording='down', sorting='date', page = 0):
 			image = cd['image']
 			#imagefile = get_images_from_form(form)
 			date = datetime.datetime.now()
-			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date)
+			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date, image=image)
 			fls = ContentFile(request.FILES['image'].read())
 			record.image.save(request.FILES['image'].name, fls)
 			record.save()
