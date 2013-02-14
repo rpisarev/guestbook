@@ -22,3 +22,9 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 )
 urlpatterns += staticfiles_urlpatterns()
+urlpatterns += patterns('',
+       (r'^cache/(?P<path>.*)$', 'django.views.static.serve', {
+           'document_root': settings.MEDIA_ROOT,
+           'show_indexes': True,
+       }),
+   )
