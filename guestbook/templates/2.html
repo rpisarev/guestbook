@@ -59,7 +59,7 @@
     <th>IP </th>
   </tr>
 {% load thumbnail %}
-{% for rows in d.object_list %}
+{% for rows in tbl.object_list %}
 <tr  class="{% cycle "colorwhite" "colorgray" %}">
         {% for cols in rows.lst %}
                 <td{% if forloop.first %} class="user"{% endif %}>
