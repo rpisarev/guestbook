@@ -124,6 +124,7 @@ INSTALLED_APPS = (
 #    'django.contrib.sessions',
 #    'django.contrib.sites',
 #    'django.contrib.messages',
+	'sorl.thumbnail'
 	'django.contrib.staticfiles',
 	'gba',
 	'captcha',
