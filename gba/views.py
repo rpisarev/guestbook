@@ -76,7 +76,8 @@ def home(request, ording='down', sorting='date', page = 0):
 	except:
 		t = paginator.page(1)
 	uri = '/' + ording + '/' + sorting + '/'
-	s = dir(guestbook.urls.urlpatterns[-1])
+	s = guestbook.urls.urlpatterns[-1].regex
+	guestbook.urls.urlpatterns[-1].regex = s
 	t =1/0
 	return render_to_response('2.html', 
 	{
