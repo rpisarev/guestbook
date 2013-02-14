@@ -27,6 +27,9 @@ def home(request, ording='down', sorting='date', page = 0):
 			ip = request.META['REMOTE_ADDR']
 			browser = request.META['HTTP_USER_AGENT']
 			imagefile = ContentFile(request.FILES['image'].read())
+			g = request.FILES['image']
+			h = ContentFile(g.read())
+			j=1/0
 			date = datetime.datetime.now()
 			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date)
 			record.image.save(request.FILES['image'].name, imagefile)
