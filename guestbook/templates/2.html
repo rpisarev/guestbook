@@ -64,7 +64,9 @@
         {% for cols in rows.lst %}
                 <td{% if forloop.first %} class="user"{% endif %}>
                 {% if forloop.counter == 2 %} 
+                   {% if cols|length > 0 %}
                 <img src="{{ STATIC_URL }}/static/{{ cols }}" alt="{{ cols|wordwrap:20|escape }}" />
+                   {% endif %}
                 {% else %}
                 {{ cols|wordwrap:20|escape }}</td> {% endif %}
         {% endfor %}
