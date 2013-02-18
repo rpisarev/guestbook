@@ -8,6 +8,7 @@ import guestbook.settings
 
 urlpatterns = patterns('',
     # Examples:
+	url(r'^ajax/', 'gba.views.ajax', name='ajax'),
 	url(r'^([a-z]+)/([a-z]+)/(\d*)/$', 'gba.views.home', name='home'),
 	url(r'^([a-z]+)/([a-z]+)/$', 'gba.views.home', name='home'),
 	url(r'^(\d*)/$', 'gba.views.home', name='home'),

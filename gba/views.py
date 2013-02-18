@@ -1,7 +1,7 @@
 # Create your views here.
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse, Http404,HttpResponseRedirect
-from django.template.loader import get_template
+from django.template.loader import get_template, render_to_string
 from django import template
 from sorl.thumbnail.shortcuts import get_thumbnail
 import time
@@ -14,6 +14,7 @@ from django.core.files.base import ContentFile
 import datetime, unicodedata
 import guestbook.urls
 from gba.forms import AddGuBook, RecaptchaForm
+import json
 
 		
 
@@ -72,3 +73,7 @@ def home(request, ording='down', sorting='date', page = 0):
 		'uri': uri
 	}
 	)
+
+def ajax(request):
+	if request.is_ajax() and request.method == 'POST':
+		pass
