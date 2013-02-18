@@ -32,10 +32,11 @@ def home(request, ording='down', sorting='date', page = 0):
 			image = cd['image']
 			date = datetime.datetime.now()
 			record = GuBook(username=username, email=email, homepage=homepage, text=text, ip=ip, browser=browser, date=date, image=image)
-			fls = ContentFile(request.FILES['image'].read())
-			record.image.save(request.FILES['image'].name, fls)
-			resize_fls = get_thumbnail(record.image, '60x80', crop='center', quality=99)
-			image = resize_fls.url
+			if image:
+				fls = ContentFile(request.FILES['image'].read())
+				record.image.save(request.FILES['image'].name, fls)
+				resize_fls = get_thumbnail(record.image, '60x80', crop='center', quality=99)
+				image = resize_fls.url
 			record.save()
 			return HttpResponseRedirect('/')
 	else:
