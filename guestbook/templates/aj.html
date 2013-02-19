@@ -1,53 +1,17 @@
-<html>
-<head>
-<title>AJAX test</title>
-</head>
-<body>
-<script type="text/javascript">
-
-function xml_http_post(url, data, callback) {
-    var req = false;
-    try {
-        // Firefox, Opera 8.0+, Safari
-        req = new XMLHttpRequest();
-    }
-    catch (e) {
-        // Internet Explorer
-        try {
-            req = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try {
-                req = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e) {
-                alert("Your browser does not support AJAX!");
-                return false;
-            }
-        }
-    }
-    req.open("POST", url, true);
-    req.onreadystatechange = function() {
-        if (req.readyState == 4) {
-            callback(req);
-        }
-    }
-    req.send(data);
-}
-
-function test_button() {
-    var data = document.test_form.test_text.value;           
-    xml_http_post("aj.html", data, test_handle)
-}
-
-function test_handle(req) {
-    var elem = document.getElementById('test_result')
-    elem.innerHTML =  req.responseText
-}
-
-</script>
-
-<form name=test_form>
-<input type=button onClick="test_button();" value="=" title="=">
-<span id="test_result">0</span>
-</form
+{% load thumbnail %}
+{% for rows in ajax_add.object_list %}
+<tr  class="{% cycle "colorwhite" "colorgray" %}">
+        {% for cols in rows.lst %}
+                <td{% if forloop.first %} class="user"{% endif %}>
+                {% if forloop.counter == 2 %}
+                   {% if cols %}
+                   {% thumbnail cols "120x160" as im %}
+                   <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}">
+                {% endthumbnail %}
+                    {% else %} {{ cols|wordwrap:20|escape }}
+                   {% endif %}
+                {% else %}
+                {{ cols|wordwrap:20|escape }}</td> {% endif %}
+        {% endfor %}
+</tr>
+{% endfor %}

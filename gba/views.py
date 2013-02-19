@@ -15,8 +15,7 @@ import datetime, unicodedata
 import guestbook.urls
 from gba.forms import AddGuBook, RecaptchaForm
 import json
-
-		
+from django.core import serializers
 
 def home(request, ording='down', sorting='date', page = 0):
 	if request.method == 'POST':
@@ -64,6 +63,7 @@ def home(request, ording='down', sorting='date', page = 0):
 		tbl = paginator.page(page)
 	except:
 		tbl = paginator.page(1)
+		page = 1
 	uri = '/' + ording + '/' + sorting + '/'
 	return render_to_response('2.html', 
 	{
@@ -71,10 +71,39 @@ def home(request, ording='down', sorting='date', page = 0):
 		'tbl': tbl,
 		'ording': currentort,
 		'page': page,
-		'uri': uri
+		'uri': uri,
+		'post_ord': ording,
+		'post_sort': sorting,
+		'all_count_page': paginator.num_pages
 	}
 	)
 
 def ajax(request):
-	if request.is_ajax() and request.method == 'POST':
-		pass
+	if request.method == 'POST':
+		post_ord = request.POST.get('ord_to_post')
+		post_sort = request.POST.get('sort_to_post')
+		page = request.POST.get('page')
+		page = int(page)
+		sorttype = {
+                        ('up', 'date'): 'date',
+                        ('down', 'date'): '-date',
+                        ('up', 'username'): 'username',
+                        ('down', 'username'): '-username',
+                        ('up', 'email'): 'email',
+                        ('down', 'email'): '-email',
+                }[(post_ord, post_sort)]
+		mesgs = GuBook.objects.all().order_by(sorttype)
+	        paginator = Paginator(mesgs, 10)
+		tbl = paginator.page(page)
+		if page > paginator.num_pages:
+			return HttpResponse('', content_type="text/plain")
+			page = paginator.num_pages
+		else:
+			return render_to_response('aj.html',
+        		{
+                	'ajax_add': tbl,
+			#'page': str(page)
+        		}
+        		)
+
+

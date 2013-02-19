@@ -34,7 +34,7 @@
 </head>
 <body>
 <script type="text/javascript">
-
+var my_page = {{page}};
 function xml_http_post(url, data, callback) {
     var req = false;
     try {
@@ -65,14 +65,16 @@ function xml_http_post(url, data, callback) {
     req.send(data);
 }
 
-function test_button() {
-    var data = document.test_form.test_text.value;
-    xml_http_post("aj.html", data, test_handle)
+function test_handle(req) {
+    var elem = document.getElementById('mytable');
+    elem.innerHTML =  elem.innerHTML + req.responseText;
 }
 
-function test_handle(req) {
-    var elem = document.getElementById('test_result')
-    elem.innerHTML =  req.responseText
+function test_button() {
+    my_page += 1;
+    if (my_page > {{ all_count_page }}) return -1;
+    var request_body = 'ord_to_post=' + encodeURIComponent('{{ post_ord }}')+'&sort_to_post='+encodeURIComponent('{{ post_sort }}')+'&page='+encodeURIComponent(my_page);
+    xml_http_post("/ajax/", request_body, test_handle)
 }
 
 </script>
@@ -90,7 +92,7 @@ function test_handle(req) {
         </table>
         <input type="submit" value="Submit">
     </form>
-<table border="1">
+<table border="1" id="mytable">
   <tr class = "colorgray">
     <th><a href="/{{ ording }}/username/1/">User Name</a></th>
     <th>Image</th>
@@ -136,6 +138,6 @@ function test_handle(req) {
     </span>
 </div>
 
-{% block results %}{% endblock %}
+<input type=button onClick="test_button();" value="More" title="More">
 </body>
 </html>
