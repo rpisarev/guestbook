@@ -97,12 +97,10 @@ def ajax(request):
 		tbl = paginator.page(page)
 		if page > paginator.num_pages:
 			return HttpResponse('', content_type="text/plain")
-			page = paginator.num_pages
 		else:
 			return render_to_response('aj.html',
         		{
                 	'ajax_add': tbl,
-			#'page': str(page)
         		}
         		)
 

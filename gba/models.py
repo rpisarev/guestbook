@@ -1,13 +1,13 @@
 from django.db import models
 
 class GuBook(models.Model):
-        username = models.CharField(max_length=255)
+        username = models.CharField(max_length = 255)
 	email = models.EmailField()
 	homepage =  models.URLField(blank = True)
 	text = models.TextField()
-	image = models.ImageField(upload_to='image', blank = True)
+	image = models.ImageField(upload_to = 'image', blank = True)
 	ip = models.IPAddressField()
-	browser = models.CharField(max_length=255)
+	browser = models.CharField(max_length = 255)
 	date = models.DateTimeField()
 	def __unicode__(self):
                 return self.text[:10]
