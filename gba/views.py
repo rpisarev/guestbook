@@ -14,8 +14,6 @@ from django.core.files.base import ContentFile
 import datetime, unicodedata
 import guestbook.urls
 from gba.forms import AddGuBook, RecaptchaForm
-import json
-from django.core import serializers
 
 def home(request, ording='down', sorting='date', page = 0):
 	if request.method == 'POST':
