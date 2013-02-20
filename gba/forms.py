@@ -1,5 +1,6 @@
 from django import forms
 from captcha.fields import ReCaptchaField
+import re
 
 class AddGuBook(forms.Form):
 	username = forms.CharField()
@@ -11,7 +12,8 @@ class AddGuBook(forms.Form):
 
 	def clean_username(self):
 		username = self.cleaned_data['username']
-		if not username.isalnum():
+		regexp_name = re.compile('[a-zA_Z0-9]+')
+		if regexp_name.match(username).group() != username:
 			raise forms.ValidationError("Not digits or alphabetic!")
 		return username
 	def clean_text(self):
