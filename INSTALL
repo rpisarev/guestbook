@@ -1,0 +1,1 @@
+For installation see requirements.txt. Also, your system must have 'libmysqlclient-dev'. Run 'sudo apt-get install libmysqlclient-dev' before work with pip-utils.
