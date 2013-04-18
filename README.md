@@ -3,4 +3,4 @@ guestbook
 
 guestbook
 
-Django-project for test job
+Django-project with AJAX for test job for DCOD
